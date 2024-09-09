@@ -76,7 +76,7 @@
         <mxCell id="xLl8ytF4RjVFqT2iBbTJ-9" value="id_produk: int (fk)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" parent="xLl8ytF4RjVFqT2iBbTJ-7" vertex="1">
           <mxGeometry y="80" width="160" height="28" as="geometry" />
         </mxCell>
-        <mxCell id="YzuPRb5QYgyvFvndKRNM-3" value="qty : int" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="xLl8ytF4RjVFqT2iBbTJ-7">
+        <mxCell id="YzuPRb5QYgyvFvndKRNM-3" value="quantity : int" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="xLl8ytF4RjVFqT2iBbTJ-7">
           <mxGeometry y="108" width="160" height="28" as="geometry" />
         </mxCell>
         <mxCell id="YzuPRb5QYgyvFvndKRNM-18" value="total : int" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="xLl8ytF4RjVFqT2iBbTJ-7">
