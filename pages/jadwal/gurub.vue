@@ -63,3 +63,5 @@
   cursor: pointer;
 }
 </style>
+<script setup>
+</script>

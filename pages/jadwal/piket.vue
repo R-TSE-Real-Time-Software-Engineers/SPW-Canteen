@@ -33,12 +33,11 @@
         </div>
       </div>
     </div>
+    <nuxt-link to="/">
+      <button type="submit" class="btn ms-3 btn-lg ">KEMBALI</button>
+    </nuxt-link>
   </div>
 </div>
-
- <nuxt-link to="/">
-    <button type="submit" class="btn ms-3 btn-lg ">KEMBALI</button>
-  </nuxt-link>
 </template>
 
 <style scoped>
@@ -71,6 +70,6 @@ h2 {
   cursor: pointer;
 }
 .text{
-  padding: 30px;
+  padding: 20px;
 }
 </style>

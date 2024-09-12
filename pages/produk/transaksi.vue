@@ -17,7 +17,7 @@
       <tbody>
         <tr>
           <th scope="row">1</th>
-          <td>Suminar, S.Kom., M.Kom</td>
+          <td>elsa</td>
           <td>XII PPLG 1</td>
           <td>Cimol</td>
           <td>10</td>
@@ -32,11 +32,11 @@
         </tr>
         <tr>
           <th scope="row">2</th>
-          <td>Budi Setiadi, S.T</td>
-          <td>10</td>
-          <td>3k</td>
-          <td>Novi Abdul Rohman, S.T</td>
-          <td>Novi Abdul Rohman, S.T</td>
+          <td>syaima</td>
+          <td>10 pplg1</td>
+          <td>cilok</td>
+          <td>11</td>
+          <td>2000</td>
           <td>
             <div class="d-flex justify-content-center align-items-center">
               <input type="number" class="form-control form-control-sm mx-2 text-center" value="0" style="width: 70px;" />
