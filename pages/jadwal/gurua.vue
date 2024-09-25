@@ -41,10 +41,14 @@
       </thead>
     </table>
   </div>
-  <nuxt-link to="piket">
-    <button type="submit" class="btn ms-3 btn-lg ">KEMBALI</button>
-  </nuxt-link>  
+  
   </template>
+  <script setup>
+  definePageMeta({
+    middleware: 'auth',
+    layout: 'jadwal',
+  })
+  </script>
   
   <style scoped>
   .text{

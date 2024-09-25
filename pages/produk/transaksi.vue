@@ -1,6 +1,11 @@
 <template>
   <div class="container my-5">
-    <h2 class="text-center mb-4">DATA TRANSAKSI PRODUK</h2>
+    <div class="row align-items-center mb-4">
+      <div class="col text-center">
+        <h2 class="mb-0">FORM ISI PRODUK</h2>
+      </div>
+    </div>
+
     <table class="table table-bordered border-dark text-center">
       <thead>
         <tr>
@@ -17,7 +22,7 @@
       <tbody>
         <tr>
           <th scope="row">1</th>
-          <td>elsa</td>
+          <td>Elsa</td>
           <td>XII PPLG 1</td>
           <td>Cimol</td>
           <td>10</td>
@@ -32,9 +37,9 @@
         </tr>
         <tr>
           <th scope="row">2</th>
-          <td>syaima</td>
-          <td>10 pplg1</td>
-          <td>cilok</td>
+          <td>Syaima</td>
+          <td>XII PPLG 1</td>
+          <td>Cilok</td>
           <td>11</td>
           <td>2000</td>
           <td>
@@ -48,50 +53,52 @@
       </tbody>
     </table>
   </div>
-
-  <div class="container my-5">
-    <div class="row">
-      <div class="col text-start">
-        <nuxt-link to="form">
-          <button type="button" class="btn btn-lg btn-primary">KEMBALI</button>
-        </nuxt-link>
-      </div>
-      <div class="col text-end">
-        <nuxt-link to="pembayaran">
-          <button type="button" class="btn btn-lg btn-primary">NEXT..</button>
-        </nuxt-link>
-      </div>
-    </div>
-  </div>
- </template>
-  
-  <style scoped>
-  .text{
-    padding: 30px;
-  }
-  .btn{
+</template>
+<script setup>
+definePageMeta({
+  middleware: 'auth',
+  layout: 'produk',
+})
+</script>
+<style scoped>
+.btn {
   border: none;
   color: white;
-  background:  #FFB085;
+  background: #FFB085; 
   margin: 4px 5px;
   padding: 10px 15px;
   font-size: 16px;
   text-align: center;
-  text-decoration: none;
   display: inline-block;
   cursor: pointer;
 }
+
+.icon-button {
+  background:none;
+  border: none;
+  cursor: pointer;
+  padding: 10px; 
+  border-radius: 0.375rem;
+}
+
 .table thead th {
-      background-color: #f8f9fa;
+  background-color: #f8f9fa;
 }
+
 .table tbody tr:nth-child(even) {
-    background-color: #f2f2f2; 
+  background-color: #f2f2f2; 
 }
+
 .form-control {
-    border-radius: 0.375rem;
+  border-radius: 0.375rem;
 }
-.btn {
-    margin: 0 0.5rem; 
+
+.text-center {
+  text-align: center;
 }
- 
-  </style>
+.bi {
+  width: 40px;
+  height: 40px;
+  fill: #FFB085; 
+}
+</style>

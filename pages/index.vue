@@ -1,59 +1,39 @@
 <template>
 <div class="container my-5">
-  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="assets/img/SPW.jpeg" class="d-block w-100" alt="Slide 1">
+  <div id="carouselExampleCaptions" class="carousel slide mt-5 p-2 bg-" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+          aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+          aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+          aria-label="Slide 3"></button>
       </div>
-      <div class="carousel-item">
-        <img src="assets/img/spw1.jpeg" class="d-block w-100" alt="Slide 2">
-      </div>
-      <div class="carousel-item">
-        <img src="assets/img/spw2.jpeg" class="d-block w-100" alt="Slide 3">
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-</div>
-
-<div class="container-fluid">
-        <div class="row my-5 d-flex justify-content-around">
-            <div class="col-lg-5 box ">
-  <div class="card rounded-5 ">
-    <div class="card-body d-flex justify-content-center align-items-center">
-      <nuxt-link to="/login/login" class="text-decoration-none text-white d-flex align-items-center">
-        <h2>LOGIN</h2>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="icon bi bi-person-circle" viewBox="0 0 16 16">
-          <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-          <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-        </svg>
-      </nuxt-link>
-    </div>
-  </div>
-</div>
-<div class="col-lg-5 d-flex justify-content-center mb-4 ">
-      <div class="card rounded-5 w-100">
-        <div class="card-body d-flex justify-content-center align-items-center">
-          <nuxt-link to="/jadwal/piket" class="text-decoration-none text-white ">
-            <h2>JADWAL PIKET</h2>
-          </nuxt-link>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="../assets/img/1.png" class="d-block w-50 rounded-img img" alt="...">
+        </div>
+        <div class="carousel-item active">
+          <img src="../assets/img/2.png" class="d-block w-50 rounded-img img" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="../assets/img/3.png" class="d-block w-50 rounded-img img" alt="...">
         </div>
       </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
-  </div>
 </div>
+
+
 
 <div class="text-center mb-4">
     <h2>Menu</h2>
@@ -85,6 +65,7 @@
   </template>
 
 <style scoped>
+
 .tr{
   background-color: #bdb9b9
 }
@@ -93,11 +74,11 @@
   width: 200px;
   padding-left: 60px;
 }
+@media only screen and (max-width: 100px) {
 .carousel {
   padding: 5px;
   position: relative;
-  height: 380px; 
-  overflow: hidden;
+  overflow: clip;
   margin: 10px 0;
 }
 .carousel-inner {
@@ -115,6 +96,7 @@
   width: 100%;
   display: block; 
   border-radius: 45px;
+}
 }
 .card {
     height: 140px;
@@ -146,4 +128,8 @@
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 50%; 
 }
+.rounded-img {
+  border-radius: 50px; 
+}
+
 </style>
