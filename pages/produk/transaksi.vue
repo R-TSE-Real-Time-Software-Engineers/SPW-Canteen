@@ -9,45 +9,28 @@
     <table class="table table-bordered border-dark text-center">
       <thead>
         <tr>
-          <th scope="col">NO</th>
-          <th scope="col">NAMA</th>
-          <th scope="col">KELAS</th>
-          <th scope="col">NAMA BARANG</th>
-          <th scope="col">HARGA JUAL</th>
-          <th scope="col">BANYAK BARANG</th>
-          <th scope="col">TRANSAKSI</th>
-          <th scope="col">TERJUAL</th>
+          <th >NO</th>
+          <th >NAMA</th>
+          <th >KELAS</th>
+          <th >NAMA BARANG</th>
+          <th >HARGA JUAL</th>
+          <th>BANYAK BARANG</th>
+          <th>TRANSAKSI</th>
+          <th >TERJUAL</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Elsa</td>
-          <td>XII PPLG 1</td>
-          <td>Cimol</td>
-          <td>1000</td>
-          <td>3</td>
-          <td>
-            <div class="d-flex justify-content-center align-items-center">
+        <tr v-for="(visitor,i) in visitors" :key="i">
+          <td>{{ i+1 }}.</td>
+          <td>{{ visitor.nama }}</td>
+          <td>{{ visitor.kelas.nama }}</td>
+          <td>{{ visitor.nama_barang }}</td>
+          <td>{{ visitor.harga }}</td>
+          <td>{{ visitor.jumlah }}</td>
+          <div class="d-flex justify-content-center align-items-center">
               <input type="number" class="form-control form-control-sm mx-2 text-center" value="0" style="width: 70px;" />
               <button class="btn btn-outline-secondary btn-sm" type="button">+</button>
             </div>
-          </td>
-          <td>3</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Syaima</td>
-          <td>XII PPLG 1</td>
-          <td>Cilok</td>
-          <td>1000</td>
-          <td>2</td>
-          <td>
-            <div class="d-flex justify-content-center align-items-center">
-              <input type="number" class="form-control form-control-sm mx-2 text-center" value="0" style="width: 70px;" />
-              <button class="btn btn-outline-secondary btn-sm" type="button">+</button>
-            </div>
-          </td>
           <td>3</td>
         </tr>
       </tbody>
@@ -59,6 +42,18 @@ definePageMeta({
   middleware: 'auth',
   layout: 'produk',
 })
+
+const supabase = useSupabaseClient()
+const visitors = ref([]);
+
+const getproduk = async () => {
+    const { data, error } = await supabase.from('produk').select(`*, kelas(*)`)
+    .order('id', { ascending: false })
+    if(data) visitors.value = data
+}
+onMounted(() => {
+    getproduk();
+});
 </script>
 <style scoped>
 .btn {
