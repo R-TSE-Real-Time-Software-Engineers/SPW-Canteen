@@ -13,8 +13,8 @@
     </div>
     <div class="button-container">
       <span class="separator">|</span>
-      <nuxt-link to="/login" class="text-decoration-none">
-        <button class="btn" type="button" style="background-color: #FF6969; color: #ffffff; border: none;">LOGIN</button>
+      <nuxt-link to="/produk/form" class="text-decoration-none">
+        <button class="btn" type="button" style="background-color: #FF6969; color: #ffffff; border: none;">ISI PRODUK</button>
     </nuxt-link>
     <nuxt-link to="/jadwal/gurua" class="text-decoration-none">
       <button class="btn btn-outline-danger" type="button">PIKET</button>
@@ -35,7 +35,7 @@ export default {
   display: flex;
   align-items: center;
   width: 100%;
-  height: 130px;
+  height: 7rem;
   background-color: #ffffff;
   color: #FF6969;
   padding: 0 20px;

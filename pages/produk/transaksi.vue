@@ -25,8 +25,8 @@
           <td>Elsa</td>
           <td>XII PPLG 1</td>
           <td>Cimol</td>
-          <td>10</td>
-          <td>3000</td>
+          <td>1000</td>
+          <td>3</td>
           <td>
             <div class="d-flex justify-content-center align-items-center">
               <input type="number" class="form-control form-control-sm mx-2 text-center" value="0" style="width: 70px;" />
@@ -40,8 +40,8 @@
           <td>Syaima</td>
           <td>XII PPLG 1</td>
           <td>Cilok</td>
-          <td>11</td>
-          <td>2000</td>
+          <td>1000</td>
+          <td>2</td>
           <td>
             <div class="d-flex justify-content-center align-items-center">
               <input type="number" class="form-control form-control-sm mx-2 text-center" value="0" style="width: 70px;" />

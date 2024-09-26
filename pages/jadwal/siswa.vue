@@ -58,18 +58,6 @@
   
   <style scoped>
   .text{
-    padding: 30px;
+    padding: 10px;
   }
-  .btn{
-  border: none;
-  color: white;
-  background:  #FFB085;
-  margin: 4px 5px;
-  padding: 10px 15px;
-  font-size: 16px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  cursor: pointer;
-}
   </style>

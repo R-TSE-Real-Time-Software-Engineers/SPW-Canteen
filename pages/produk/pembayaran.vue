@@ -14,6 +14,7 @@
           <th scope="col">Penanggung Jawab</th>
           <th scope="col">NAMA BARANG</th>
           <th scope="col">Terjual</th>
+          <th scope="col">Sisa</th>
           <th scope="col">Jumlah Pendapatan</th>
           <th scope="col">Uang Yang Di Bayarkan</th>       
         </tr>  
@@ -21,22 +22,24 @@
       <tbody>
         <tr>
           <th scope="row">1</th>
-          <td>Cilok</td>
-          <td>8</td>
-          <td>30000</td>
+          <td>syaima</td>
+          <td>cilok</td>
+          <td>2</td>
+          <td>1</td>
           <td>5000</td>
-          <td>Syaima</td>
+          <td>4500</td>
         </tr>
         <tr>
           <th scope="row">2</th>
-          <td>Cimol</td>
-          <td>7</td>
-          <td>25000</td>
+          <td>elsa</td>
+          <td>cimol</td>
+          <td>3</td>
+          <td>2</td>
           <td>5000</td>
-          <td>Elsa</td>
+          <td>40000</td>
         </tr>
         <tr>
-          <td colspan="4">Total</td>
+          <td colspan="5">Total</td>
           <td>55000</td>
           <td>10000</td>
         </tr>

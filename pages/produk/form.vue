@@ -1,6 +1,3 @@
-
-
-
 <template>
   <div class="container my-5">
    
@@ -18,8 +15,8 @@
             <input type="text" class="form-control form-control-lg radius" placeholder="Nama:" />
           </div>
           <div class="text-center mb-3">
-            <select class="form-select form-select-lg radius" aria-label="Kelas">
-              <option value="" disabled selected>Kelas</option>
+            <select class="form-control form-select-lg radius" aria-label="Kelas">
+              <option value="" selected>Kelas</option>
               <option value="1">PPLG 1</option>
               <option value="2">PPLG 2</option>
               <option value="3">PPLG 3</option>
@@ -35,8 +32,10 @@
           <div class="text-center mb-3">
             <input type="text" class="form-control form-control-lg radius" placeholder="Harga Jual:" />
           </div>
+          <div class="text-center mb-3">
+            <input type="file" class="form-control form-control-lg radius" id="file-input" accept="image/*" placeholder="Upload Foto:" required />
+          </div>
         </form>
-        
         <div class="d-flex justify-content-end mt-4">
           <nuxt-link to="form">
             <button type="button" class="btn btn-lg">KIRIM</button>
