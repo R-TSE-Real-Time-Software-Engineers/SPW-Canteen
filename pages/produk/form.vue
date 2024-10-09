@@ -27,7 +27,7 @@
             <input v-model="form.harga" type="text" class="form-control form-control-lg radius" placeholder="Harga Jual:" />
           </div>
           <div class="text-center mb-3">
-            <input type="file" class="form-control form-control-lg radius" id="file-input" accept="image/*" placeholder="Upload Foto:" required />
+            <input v-on="form.foto" type="file" class="form-control form-control-lg radius" id="file-input" accept="image/*" placeholder="Upload Foto:" required />
           </div>
           <div class="d-flex justify-content-end mt-4">
             <button type="submit" class="btn btn-lg">KIRIM</button>
@@ -53,6 +53,7 @@ const form = ref({
     nama_barang:"",
     jumlah:"",
     harga:"",
+    foto: "",
 });
 
 const kirimData = async () => {

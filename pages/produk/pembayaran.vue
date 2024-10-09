@@ -20,28 +20,14 @@
         </tr>  
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>syaima</td>
-          <td>cilok</td>
-          <td>2</td>
+        <tr v-for="(visitor, i) in visitors" :key="i">
+          <td>{{ i + 1 }}.</td>
+          <td>login</td>
+          <td>{{ visitor.nama_barang }}</td>
+          <td>12</td>
           <td>1</td>
-          <td>5000</td>
-          <td>4500</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>elsa</td>
-          <td>cimol</td>
-          <td>3</td>
-          <td>2</td>
-          <td>5000</td>
-          <td>40000</td>
-        </tr>
-        <tr>
-          <td colspan="5">Total</td>
-          <td>55000</td>
           <td>10000</td>
+          <td>9000</td>
         </tr>
       </tbody>
     </table>
@@ -52,6 +38,9 @@ definePageMeta({
   middleware: 'auth',
   layout: 'produk',
 })
+
+const supabase = useSupabaseClient()
+const visitors = ref([]);
 </script>
 <style scoped>
 .btn {

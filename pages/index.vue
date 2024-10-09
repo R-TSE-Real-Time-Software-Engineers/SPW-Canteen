@@ -32,17 +32,17 @@
     </div>
     <div class="row pt-3">
       <div class="col">
-        <h1>Product</h1>
+        <h1>Product Hari Ini</h1>
       </div>
     </div>
     <div class="row pt-3 pb-5 gap-3 justify-content-evenly">
       <!-- looping data -->
       <div class="col-lg-3">
         <div class="card">
-          <img src="..." class="card-img-top" alt="...">
+          <img src="/assets/img/mochi.webp" class="card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title">Nama Produk</h5>
-            <p class="card-text">Rp. 5000</p>
+            <p class="card-text">Mochi</p>
+            <h5 class="card-title">Rp5000</h5>
           </div>
         </div>
       </div>
