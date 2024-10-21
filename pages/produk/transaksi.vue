@@ -5,7 +5,7 @@
         <h2 class="mb-0">TRANSAKSI PRODUK</h2>
       </div>
     </div>
-
+    <button class="btn btn-primary " @click="saveTransactions">Kirim</button>
     <table class="table table-bordered border-dark text-center">
       <thead>
         <tr>
@@ -36,7 +36,7 @@
                 class="form-control form-control-sm mx-2 text-center"
                 style="width: 70px;"
                 min="0"
-                @change="updateTotal(visitor)"
+                @change="updateTotal(visitor); updateTerjual(visitor)"
               />
               <button
                 class="btn btn-outline-secondary btn-sm"
@@ -53,7 +53,7 @@
       </tbody>
     </table>
 
-    <button class="btn btn-primary" @click="saveTransactions">Kirim</button>
+    <button class="btn btn-primary " @click="saveTransactions">Kirim</button>
   </div>
 </template>
 
@@ -96,10 +96,16 @@ const updateTotal = (visitor) => {
   visitor.total = visitor.transaksi * visitor.harga; // Hitung total
 }
 
+const updateTerjual = (visitor) => {
+  // Hitung jumlah terjual berdasarkan transaksi yang telah dilakukan
+  visitor.terjual = visitor.terjual + visitor.transaksi; // Update terjual berdasarkan transaksi saat ini
+}
+
 // Fungsi untuk menambah transaksi
 const increment = (visitor) => {
   visitor.transaksi += 1; // Menambah transaksi dengan 1
   updateTotal(visitor); // Update total setelah penambahan
+  updateTerjual(visitor); // Update terjual setelah penambahan
 }
 
 // Fungsi untuk menyimpan semua transaksi ke database
@@ -107,6 +113,7 @@ const saveTransactions = async () => {
   const transactionsToSave = visitors.value
     .filter(visitor => visitor.transaksi > 0) // Ambil yang memiliki transaksi
     .map(visitor => ({
+      terjual : visitor.transaksi + visitor.terjual, // Jumlah terjual baru
       quantity: visitor.transaksi,
       total: visitor.total,
       produk: visitor.id, // Sesuaikan dengan nama kolom di tabel transaksi
@@ -117,10 +124,15 @@ const saveTransactions = async () => {
     
     if (error) {
       console.error('Error saving transactions:', error);
+      alert("Terjadi kesalahan saat menyimpan transaksi."); // Pesan kesalahan
     } else {
       console.log('Transactions saved:', data);
+      alert("Transaksi berhasil disimpan!"); // Pesan sukses
       // Reset transaksi setelah disimpan
-      visitors.value.forEach(visitor => visitor.transaksi = 0);
+      visitors.value.forEach(visitor => {
+        visitor.transaksi = 0;
+        updateTerjual(visitor); // Reset terjual berdasarkan transaksi baru
+      });
     }
   } else {
     alert("Tidak ada transaksi untuk disimpan.");
@@ -131,9 +143,6 @@ onMounted(() => {
   getproduk();
 });
 </script>
-
-
-
 
 <style scoped>
 .btn {

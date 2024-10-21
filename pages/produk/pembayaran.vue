@@ -1,9 +1,8 @@
 <template>
-   <div class="container my-5">
+  <div class="container my-5">
     <div class="row align-items-center mb-4">
       <div class="col text-center">
-        <h2 class="mb-0">DATA PEMBAYARAN PRODUK
-        </h2>
+        <h2 class="mb-0">DATA PEMBAYARAN PRODUK</h2>
       </div>
     </div>
     
@@ -20,19 +19,20 @@
         </tr>  
       </thead>
       <tbody>
-        <tr v-for="(visitor, i) in visitors" :key="i">
-          <td>{{ i + 1 }}.</td>
-          <td>login</td>
-          <td>{{ visitor.nama_barang }}</td>
-          <td>12</td>
-          <td>1</td>
-          <td>10000</td>
-          <td>9000</td>
+        <tr v-for="(transaction, i) in transactions" :key="i">
+          <td>{{ i + 1 }}</td>
+          <td>{{ penanggungJawab }}</td>
+          <td>{{ transaction.nama_barang }}</td>
+          <td>{{ transaction.terjual }}</td>
+          <td>{{ transaction.sisa }}</td>
+          <td>{{ transaction.jumlah_pendapatan }}</td>
+          <td>{{ transaction.uang_dibayarkan }}</td>
         </tr>
       </tbody>
     </table>
   </div>
 </template>
+
 <script setup>
 definePageMeta({
   middleware: 'auth',
@@ -40,8 +40,38 @@ definePageMeta({
 })
 
 const supabase = useSupabaseClient()
-const visitors = ref([]);
+const transactions = ref([]);
+
+const penanggungJawab = "Nama Penanggung Jawab"; // Ganti dengan nama yang sesuai dari data login
+
+const getTransactions = async () => {
+  const { data, error } = await supabase.from('transaksi').select('*, produk(*)');
+  
+  if (error) {
+    console.error('Error fetching transactions:', error);
+    return;
+  }
+
+  if (data) {
+    transactions.value = data.map(item => {
+      const jumlahPendapatan = item.quantity * item.produk.harga; // Hitung jumlah pendapatan
+      return {
+        nama_barang: item.produk.nama_barang,
+        terjual: item.quantity,
+        sisa: item.produk.jumlah - item.quantity, // Hitung sisa
+        jumlah_pendapatan: jumlahPendapatan, // Simpan jumlah pendapatan
+        uang_dibayarkan: jumlahPendapatan * 0.9, // Hitung uang yang dibayarkan (90% dari jumlah pendapatan)
+      };
+    });
+  }
+};
+
+// Panggil fungsi untuk mengambil data saat komponen dimuat
+onMounted(() => {
+  getTransactions();
+});
 </script>
+
 <style scoped>
 .btn {
   border: none;
