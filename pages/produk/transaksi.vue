@@ -5,7 +5,12 @@
         <h2 class="mb-0">TRANSAKSI PRODUK</h2>
       </div>
     </div>
-    <button class="btn btn-primary " @click="saveTransactions">Kirim</button>
+    <div class="row justify-content-end ">
+      <div class="col-1">
+        <button class="btn" @click="saveTransactions" style="background-color: #FFB085">Kirim</button>
+      </div>
+    </div>
+    
     <table class="table table-bordered border-dark text-center">
       <thead>
         <tr>
@@ -17,7 +22,6 @@
           <th>BANYAK BARANG</th>
           <th>TRANSAKSI</th>
           <th>TOTAL</th>
-          <th>TERJUAL</th>
         </tr>
       </thead>
       <tbody>
@@ -38,22 +42,30 @@
                 min="0"
                 @change="updateTotal(visitor); updateTerjual(visitor)"
               />
+                        <button
+            class="btn btn-outline-secondary btn-sm"
+            type="button"
+            @click="increment(visitor)"
+            :disabled="visitor.transaksi >= visitor.jumlah" 
+          >
+            +
+          </button>
+
+
               <button
-                class="btn btn-outline-secondary btn-sm"
+                class="btn btn-outline-danger btn-sm"
                 type="button"
-                @click="increment(visitor)"
+                @click="resetTransaction(visitor)"
               >
-                +
+                Batalkan
               </button>
             </div>
           </td>
           <td>{{ visitor.total }}</td>
-          <td>{{ visitor.terjual }}</td>
         </tr>
       </tbody>
     </table>
 
-    <button class="btn btn-primary " @click="saveTransactions">Kirim</button>
   </div>
 </template>
 
@@ -65,30 +77,24 @@ definePageMeta({
 
 const supabase = useSupabaseClient()
 const visitors = ref([]);
+const userID = ref();
+const user = useSupabaseUser()
 
 // Fungsi untuk mendapatkan produk dan jumlah terjual
 const getproduk = async () => {
-  const { data: produkData, error: produkError } = await supabase.from('produk').select(`*, kelas(*)`).order('id', { ascending: false });
+  const { data: produkData, error: produkError } = await supabase
+    .from('produk')
+    .select(`*, kelas(*)`)
+    .order('id', { ascending: false });
   
   if (produkData) {
     visitors.value = produkData.map(item => ({ ...item, transaksi: 0, total: 0, terjual: 0 }));
+    // console.log(produkData)
+    // visitors.value = produkData
   }
 
   // Mengambil data transaksi untuk menghitung jumlah terjual
-  const { data: transaksiData, error: transaksiError } = await supabase
-    .from('transaksi')
-    .select('produk, sum(quantity) as total_terjual')
-    .group('produk');
-
-  if (transaksiData) {
-    // Update jumlah terjual di visitors
-    transaksiData.forEach(transaksi => {
-      const product = visitors.value.find(v => v.id === transaksi.produk);
-      if (product) {
-        product.terjual = transaksi.total_terjual; // Memperbarui jumlah terjual
-      }
-    });
-  }
+ 
 }
 
 // Fungsi untuk mengupdate total berdasarkan quantity
@@ -96,27 +102,43 @@ const updateTotal = (visitor) => {
   visitor.total = visitor.transaksi * visitor.harga; // Hitung total
 }
 
-const updateTerjual = (visitor) => {
-  // Hitung jumlah terjual berdasarkan transaksi yang telah dilakukan
-  visitor.terjual = visitor.terjual + visitor.transaksi; // Update terjual berdasarkan transaksi saat ini
-}
-
 // Fungsi untuk menambah transaksi
 const increment = (visitor) => {
-  visitor.transaksi += 1; // Menambah transaksi dengan 1
-  updateTotal(visitor); // Update total setelah penambahan
-  updateTerjual(visitor); // Update terjual setelah penambahan
+  if (visitor.transaksi <= visitor.jumlah) {
+    visitor.transaksi += 1; // Hanya tambah jika kurang dari jumlah
+    updateTotal(visitor); // Update total setelah penambahan
+  } else {
+    alert("Jumlah transaksi tidak boleh lebih dari jumlah barang tersedia."); // Pesan kesalahan
+  }
 }
 
+async function getUserLogin() {
+  const {data,error } = await supabase
+    .from("login") 
+    .select() 
+    .eq("user_id", user.value.id)
+    .single()
+  if(data){
+    userID.value = data.id
+  }
+  
+}
+
+const resetTransaction = (visitor) => {
+  visitor.transaksi = 0; // Kembalikan nilai transaksi ke 0
+  visitor.terjual = 0; // Kembalikan nilai terjual ke 0
+  updateTotal(visitor); // Perbarui total setelah reset
+}
 // Fungsi untuk menyimpan semua transaksi ke database
 const saveTransactions = async () => {
   const transactionsToSave = visitors.value
     .filter(visitor => visitor.transaksi > 0) // Ambil yang memiliki transaksi
     .map(visitor => ({
-      terjual : visitor.transaksi + visitor.terjual, // Jumlah terjual baru
+      terjual: visitor.terjual + visitor.transaksi, // Jumlah terjual baru
       quantity: visitor.transaksi,
       total: visitor.total,
-      produk: visitor.id, // Sesuaikan dengan nama kolom di tabel transaksi
+      produk: visitor.id,
+      id_user :  userID.value// Sesuaikan dengan nama kolom di tabel transaksi
     }));
 
   if (transactionsToSave.length > 0) {
@@ -130,17 +152,19 @@ const saveTransactions = async () => {
       alert("Transaksi berhasil disimpan!"); // Pesan sukses
       // Reset transaksi setelah disimpan
       visitors.value.forEach(visitor => {
-        visitor.transaksi = 0;
-        updateTerjual(visitor); // Reset terjual berdasarkan transaksi baru
+        visitor.transaksi = 0; // Reset transaksi
+        // Tidak perlu update terjual di sini, karena sudah diupdate
       });
     }
   } else {
-    alert("Tidak ada transaksi untuk disimpan.");
+    //const { data, error } = await supabase.from('transaksi').update(transactionsToSave);
+    alert("Anda Belum Melakukan Transaksi"); // Pesan kesalahan
   }
 }
 
 onMounted(() => {
   getproduk();
+  getUserLogin()
 });
 </script>
 
@@ -156,7 +180,6 @@ onMounted(() => {
   display: inline-block;
   cursor: pointer;
 }
-
 .icon-button {
   background:none;
   border: none;
@@ -164,25 +187,16 @@ onMounted(() => {
   padding: 10px; 
   border-radius: 0.375rem;
 }
-
 .table thead th {
   background-color: #f8f9fa;
 }
-
 .table tbody tr:nth-child(even) {
   background-color: #f2f2f2; 
 }
-
 .form-control {
   border-radius: 0.375rem;
 }
-
 .text-center {
   text-align: center;
-}
-.bi {
-  width: 40px;
-  height: 40px;
-  fill: #FFB085; 
 }
 </style>
