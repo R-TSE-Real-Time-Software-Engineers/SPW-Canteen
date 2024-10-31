@@ -27,7 +27,8 @@
             <input v-model="form.harga" type="text" class="form-control form-control-lg radius" placeholder="Harga Jual:" />
           </div>
           <div class="text-center mb-3">
-            <input v-on="form.foto" type="file" class="form-control form-control-lg radius" id="file-input" accept="image/*" placeholder="Upload Foto:" required />
+             <label>Upload Foto Produk</label>
+             <input @change="handleFileInput" type="file" class="form-control form-control-lg radius" id="file-input" accept="image/*" placeholder="Upload Foto Produk:" required />
           </div>
           <div class="d-flex justify-content-end mt-4">
             <button type="submit" class="btn btn-lg">KIRIM</button>
@@ -46,30 +47,62 @@ definePageMeta({
 
 const supabase = useSupabaseClient()
 const members=ref ([]);
-
+const file = ref(null);
 const form = ref({
     nama: "",
     kelas:"",
     nama_barang:"",
     jumlah:"",
     harga:"",
-    foto: "",
 });
-
-const kirimData = async () => {
-    console.log(form.value)
-    const { error } = await supabase.from("produk").insert([form.value])
-    if(!error) navigateTo("/produk/form")
-    else throw error
-}
 const getkelas = async () => {
     const { data, error } = await supabase.from("kelas").select("*")
     if(data) members.value = data
 };
+
+// upload foto
+const handleFileInput = (event) => {
+  file.value = event.target.files[0];
+};
+
+const kirimData = async () => {
+  if (!file.value) {
+    alert("Pilih file terlebih dahulu!");
+    return;
+  }
+
+  try {
+    const { data, error } = await supabase.storage.from("foto").upload(`public/${file.value.name}`, file.value);
+
+    if (error) {
+      throw error;
+    }
+
+    const publicUrl = supabase.storage.from("foto").getPublicUrl(`public/${file.value.name}`).data.publicUrl;
+    const { error: insertError } = await supabase.from("produk").insert([{ foto: publicUrl, ...form.value }]);
+
+    if (!error) {
+      window.location.reload();
+    }
+
+    if (insertError) {
+      throw insertError;
+    }
+
+    alert("berhasil dikirim!");
+  } catch (error) {
+    console.error("Error uploading file:", error.message);
+    // alert("Gagal mengupload file.");
+  }
+};
+// end
+
+
 onMounted(() => {
     getkelas();
 });
 </script>
+
 <style scoped>
 .btn {
   border: none;

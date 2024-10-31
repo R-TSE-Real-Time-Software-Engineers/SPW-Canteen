@@ -158,7 +158,7 @@ const saveTransactions = async () => {
     }
   } else {
     //const { data, error } = await supabase.from('transaksi').update(transactionsToSave);
-    alert("Anda Belum Melakukan Transaksi"); // Pesan kesalahan
+    alert("Terjadi"); // Pesan kesalahan
   }
 }
 
@@ -180,6 +180,7 @@ onMounted(() => {
   display: inline-block;
   cursor: pointer;
 }
+
 .icon-button {
   background:none;
   border: none;
@@ -187,16 +188,21 @@ onMounted(() => {
   padding: 10px; 
   border-radius: 0.375rem;
 }
+
 .table thead th {
   background-color: #f8f9fa;
 }
+
 .table tbody tr:nth-child(even) {
   background-color: #f2f2f2; 
 }
+
 .form-control {
   border-radius: 0.375rem;
 }
+
 .text-center {
   text-align: center;
 }
+
 </style>

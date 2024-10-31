@@ -53,6 +53,15 @@ const getTransactions = async () => {
 
   if (data) {
     transactions.value = data
+    // .map(item => {
+    //   return {
+    //     nama_barang: item.nama_barang,
+    //     terjual: item.quantity,
+    //     sisa: item.jumlah - item.quantity, // Hitung sisa
+    //     jumlah_pendapatan: item.jumlahPendapatan, // Simpan jumlah pendapatan
+    //     uang_dibayarkan: jumlahPendapatan * 0.9, // Hitung uang yang dibayarkan (90% dari jumlah pendapatan)
+    //   };
+    // });
   }
 };
 
@@ -74,17 +83,21 @@ onMounted(() => {
   display: inline-block;
   cursor: pointer;
 }
+
 .table thead th {
   background-color: #f8f9fa;
 }
+
 .table tbody tr:nth-child(even) {
   background-color: #f2f2f2; 
 }
+
 .icon-button {
   background: none;
   border: none;
   cursor: pointer;
 }
+
 .bi {
   width: 40px;
   height: 40px;
