@@ -35,18 +35,48 @@
         <h1>Product Hari Ini</h1>
       </div>
     </div>
-    <div class="row pt-3 pb-5 gap-3 justify-content-evenly">
-      <!-- looping data -->
-      <div class="col-lg-3">
-        <div class="card">
-          <img src="/assets/img/mochi.webp" class="card-img-top" alt="...">
-          <div class="card-body">
-            <p class="card-text">Mochi</p>
-            <h5 class="card-title">Rp5000</h5>
+    <div class="row justify-content-evenly">
+          <div
+            v-for="(produk, i) in produks"
+            :key="i"
+            class="col-6 col-lg-2 d-flex"
+          >
+            <div class="card flex-fill mb-3 shadow-lg">
+              <div class="card-body">
+                  <img :src="produk.foto" class="cover" :alt="produk.id" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.svgrepo.com%2Fsvg%2F508699%2Flandscape-placeholder&psig=AOvVaw2-SWmfk33NzXubPfqn0P16&ust=1714794757874000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCNjln7nK8IUDFQAAAAAdAAAAABAE://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.svgrepo.com%2Fsvg%2F508699%2Flandscape-placeholder&psig=AOvVaw2-SWmfk33NzXubPfqn0P16&ust=1714794757874000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCNjln7nK8IUDFQAAAAAdAAAAABAE"/><br>
+                  <div class="card-body">
+                    <h3 class="card-text">{{ produk.nama_barang }}</h3>
+                    <h5 class="card-title">Rp.{{ produk.harga }}</h5>
+                  </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
- 
     </div>
-  </div>
 </template>
+<script setup>
+import { onMounted } from 'vue';
+
+const supabase = useSupabaseClient();
+const produks = ref([]);
+
+
+const getproduk = async () => {
+  const { data, error } = await supabase
+    .from("produk")
+    .select(`*,kelas(*)`)
+    .ilike("nama", `%${keyword.value}%`);
+  if (data) produks.value = data;
+};
+
+onMounted(() => {
+  getproduk();
+});
+
+const keyword = ref("");
+</script>
+<style scoped>
+.cover{
+  width: 100%;
+}
+</style>
