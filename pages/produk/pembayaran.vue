@@ -5,6 +5,13 @@
         <h2 class="mb-0">DATA PEMBAYARAN PRODUK</h2>
       </div>
     </div>
+    <div class="row justify-content-end ">
+      <div class="col-2">
+            <button @click="downloadExcel" class="btn ">
+              Download Data
+            </button>
+  </div>
+
     
     <table class="table table-bordered border-dark text-center">
       <thead>
@@ -31,9 +38,34 @@
       </tbody>
     </table>
   </div>
+</div>
 </template>
 
 <script setup>
+import * as XLSX from 'xlsx';
+import {saveAs} from 'file-saver';
+
+// mendownload data Excel
+const downloadExcel = () => {
+
+// Buat worksheet dari data yang ada di visitors
+const worksheet = XLSX.utils.json_to_sheet(transactions.value);
+
+// Buat workbook dan tambahkan worksheet ke dalamnya
+const workbook = XLSX.utils.book_new();
+XLSX.utils.book_append_sheet(workbook, worksheet, 'data');
+
+// Hasilkan file Excel dalam format array buffer
+const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+
+// Buat Blob dan download file 
+const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+saveAs(blob, 'data-pembayaran_produk.xlsx');
+};
+
+
+
+
 definePageMeta({
   middleware: 'auth',
   layout: 'produk',
@@ -66,13 +98,14 @@ onMounted(() => {
 .btn {
   border: none;
   color: white;
-  background: #FFB085;
+  background: #39ff27;
   margin: 0 0.5rem; 
   padding: 10px 15px;
   font-size: 16px;
   text-align: center;
   display: inline-block;
   cursor: pointer;
+  margin-bottom: 1rem;
 }
 .table thead th {
   background-color: #f8f9fa;

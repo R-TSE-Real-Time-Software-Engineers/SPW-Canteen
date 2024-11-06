@@ -42,7 +42,7 @@
                 min="0"
                 @change="updateTotal(visitor); updateTerjual(visitor)"
               />
-                        <button
+              <button
             class="btn btn-outline-secondary btn-sm"
             type="button"
             @click="increment(visitor)"
@@ -106,6 +106,15 @@ const updateTotal = (visitor) => {
 const increment = (visitor) => {
   if (visitor.transaksi <= visitor.jumlah) {
     visitor.transaksi += 1; // Hanya tambah jika kurang dari jumlah
+    updateTotal(visitor); // Update total setelah penambahan
+  } else {
+    alert("Jumlah transaksi tidak boleh lebih dari jumlah barang tersedia."); // Pesan kesalahan
+  }
+}
+
+const min = (visitor) => {
+  if (visitor.transaksi <= visitor.jumlah) {
+    visitor.transaksi -= 1; // Hanya tambah jika kurang dari jumlah
     updateTotal(visitor); // Update total setelah penambahan
   } else {
     alert("Jumlah transaksi tidak boleh lebih dari jumlah barang tersedia."); // Pesan kesalahan

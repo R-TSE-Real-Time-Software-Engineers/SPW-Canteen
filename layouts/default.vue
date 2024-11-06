@@ -1,7 +1,7 @@
 <template>
   <div>
   <div class=".container-fluid " style="padding-top: 5%;">
-      <Header/>
+      <Header />
       <slot />
   </div>
   </div>

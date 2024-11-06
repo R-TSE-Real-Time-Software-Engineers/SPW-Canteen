@@ -13,7 +13,10 @@
     "@nuxtjs/supabase": "^1.4.0",
     "bootstrap": "5.2",
     "bootstrap-icons": "^1.11.3",
+    "file-saver": "^2.0.5",
+    "modules": "^0.4.0",
     "nuxt": "^3.12.4",
-    "vue": "latest"
+    "vue": "latest",
+    "xlsx": "^0.18.5"
   }
 }
